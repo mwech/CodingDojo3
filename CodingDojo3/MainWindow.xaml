@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CodingDojo3"
         mc:Ignorable="d"
+        DataContext="{Binding Source={StaticResource Locator}, Path=Main}"
         Title="MainWindow" Height="600" Width="800">
     <Grid Background="Black">
         <Grid.RowDefinitions>
@@ -106,8 +107,8 @@
                             <Image Margin="0,8,10,0" Height="30" Source="img/Speaker Increase - 02.png"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <Label Content="12:34" Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Foreground="#FFE0E0E0"/>
-                            <Label Content="14.11.2017" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Foreground="#FFE0E0E0"/>
+                            <Label Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Foreground="#FFE0E0E0" Content="{Binding CurrentTime}"/>
+                            <Label Margin="0,0,0,0"  VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Foreground="#FFE0E0E0" Content="{Binding CurrentDate}"/>
                         </StackPanel>
                     </StackPanel>
                 </Border>

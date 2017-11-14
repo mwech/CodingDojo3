@@ -1,34 +1,51 @@
 using GalaSoft.MvvmLight;
+using System;
+using System.Windows.Threading;
 
 namespace CodingDojo3.ViewModel
 {
-    /// <summary>
-    /// This class contains properties that the main View can data bind to.
-    /// <para>
-    /// Use the <strong>mvvminpc</strong> snippet to add bindable properties to this ViewModel.
-    /// </para>
-    /// <para>
-    /// You can also use Blend to data bind with the tool's support.
-    /// </para>
-    /// <para>
-    /// See http://www.galasoft.ch/mvvm
-    /// </para>
-    /// </summary>
+
     public class MainViewModel : ViewModelBase
     {
-        /// <summary>
-        /// Initializes a new instance of the MainViewModel class.
-        /// </summary>
+        private string currentTime = DateTime.Now.ToLocalTime().ToShortTimeString();
+        private string currentDate = DateTime.Now.ToLocalTime().ToShortDateString();
+
+        public string CurrentTime
+        {
+            get
+            {
+                return currentTime;
+            }
+            set
+            {
+                currentTime = value; RaisePropertyChanged();
+            }
+        }
+
+        public string CurrentDate
+        {
+            get
+            {
+                return currentDate;
+            }
+
+            set
+            {
+                currentDate = value; RaisePropertyChanged();
+            }
+        }
         public MainViewModel()
         {
-            ////if (IsInDesignMode)
-            ////{
-            ////    // Code runs in Blend --> create design time data.
-            ////}
-            ////else
-            ////{
-            ////    // Code runs "for real"
-            ////}
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = new TimeSpan(0, 0, 10);
+            timer.Tick += UpdateDateTime;
+            timer.Start();
         }
+
+        private void UpdateDateTime(object sender, EventArgs e)
+        {
+            CurrentTime = DateTime.Now.ToLocalTime().ToShortTimeString();
+            CurrentDate = DateTime.Now.ToLocalTime().ToShortDateString();
+    }
     }
 }
