@@ -1,4 +1,5 @@
 using GalaSoft.MvvmLight;
+using Shared.BaseModels;
 using Shared.Interfaces;
 using Simulation;
 using System;
@@ -16,6 +17,7 @@ namespace CodingDojo3.ViewModel
         private string currentDate = DateTime.Now.ToLocalTime().ToShortDateString();
         public ObservableCollection<ItemVm> SensorList { get; set; }
         public ObservableCollection<ItemVm> ActorList { get; set; }
+        public ObservableCollection<string> ModeSelectionList { get; private set; }
 
         public string CurrentTime
         {
@@ -45,16 +47,20 @@ namespace CodingDojo3.ViewModel
         {
             SensorList = new ObservableCollection<ItemVm>();
             ActorList = new ObservableCollection<ItemVm>();
+            ModeSelectionList = new ObservableCollection<string>();
+
+            foreach (var item in Enum.GetNames(typeof(SensorModeType)))
+            {
+                ModeSelectionList.Add(item);
+            }
 
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = new TimeSpan(0, 0, 10);
             timer.Tick += UpdateDateTime;
+
             if (!IsInDesignMode)
             {
-                //load Data
                 LoadData();
-
-                //start timer for date/time update
                 timer.Start();
             }
         }
@@ -69,13 +75,12 @@ namespace CodingDojo3.ViewModel
                 else if (item.ItemType.Equals(typeof(IActuator)))
                     ActorList.Add(item);
             }
-
         }
 
         private void UpdateDateTime(object sender, EventArgs e)
         {
             CurrentTime = DateTime.Now.ToLocalTime().ToShortTimeString();
             CurrentDate = DateTime.Now.ToLocalTime().ToShortDateString();
-    }
+        }
     }
 }
