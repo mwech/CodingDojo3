@@ -1,4 +1,4 @@
-﻿using CodingDojo2.ViewModel;
+﻿using CodingDojo3.ViewModel;
 using Shared.Interfaces;
 using Shared.Models;
 using System;

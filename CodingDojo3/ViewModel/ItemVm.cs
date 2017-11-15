@@ -4,7 +4,7 @@ using Shared.Interfaces;
 using Shared.Models;
 using System;
 
-namespace CodingDojo2.ViewModel
+namespace CodingDojo3.ViewModel
 {
     public class ItemVm : ViewModelBase
     {
